@@ -4,7 +4,7 @@ SimStock
 #### Motivation
 Everyone in the stock market has his/her own strategies. They are almost without exception all simple, because we human can not handle complicated information effectivly or at least not stable like the computer. Some people are using their analytical thinking, some are using instinct, others by courage...I'm not laugthing at them, I mean they are also the components of the unpredictable market. The point is some of them are making money. Are they just lucky? 
 
-I know there are thousands of factors that will influence the stock market. The people like from wall street are using abstruse mathematical formulas and models to predict the market in order to maximize the profit. It's a asymmetric warfare, because they acquire more information quickly as the normal trader, they own super computers and super prediction programs, and most of all they have a huge amount of capital.
+There are thousands of factors that will influence the stock market. The people like from wall street are using abstruse mathematical formulas and models to predict the market in order to maximize the profit. It's a asymmetric warfare, because they acquire more information quickly as the normal trader, they own super computers and super prediction programs, and most of all they have a huge amount of capital.
 
 Fortunately, it's for them not easy at all handling billions of money so flexible as the normal trader. They are too huge to easily become a target. There are so many random factors influence the market that they can not predict and react in time. As long as the random factors exist, no prediction could really be secure. So what if we consider the trading on the stock market is just a game of probability or gamble? 
 
