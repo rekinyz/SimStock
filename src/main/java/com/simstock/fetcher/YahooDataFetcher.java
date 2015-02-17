@@ -1,85 +1,98 @@
 package com.simstock.fetcher;
 
+import java.util.Calendar;
+
+/**
+ * YahooDataFetcher
+ * 
+ * Data Fetcher using "Builder" Design Pattern that is introduced in Effective
+ * Java
+ * 
+ * @author rekinyz
+ */
 public class YahooDataFetcher implements DataFetcher {
 
-	public static final String URL = "http://ichart.yahoo.com/table.csv?";
-	
-	private String requestURL;
-	
-	private Param stockSymbol;
+	private static final String basicURL = "http://ichart.yahoo.com/table.csv?";
+	private StringBuilder requestURL = new StringBuilder(basicURL);
 
-	private Param fromDate;
-	private Param fromMonth;
-	private Param fromYear;
-	private Param toDate;
-	private Param toMonth;
-	private Param toYear;
+	private String stockName;
+	private Calendar fromDate;
+	private Calendar toDate;
 
-	private YahooDataFetcher(Builder b) {
-		this.requestURL = b.requestURL;
-		this.stockSymbol = b.stockSymbol;
-		
-		this.fromDate = b.fromDate;
-		this.fromMonth = b.fromMonth;
-		this.fromYear = b.fromYear;
-		this.toDate = b.toDate;
-		this.toMonth = b.toMonth;
-		this.toYear = b.toYear;
-	}
-	
-	public String getRequestURL() {
-		return this.requestURL;
+	public YahooDataFetcher(String stockName) {
+		this.stockName = stockName;
+		append(this.requestURL, "s=", stockName);
 	}
 
-	public static class Builder {
-		private String requestURL;
-		private Param stockSymbol;
+	public YahooDataFetcher(String stockName, Calendar fromDate) {
+		this(stockName);
+		this.fromDate = fromDate;
+		append(this.requestURL, "&b=", fromDate.get(Calendar.DATE));
+		append(this.requestURL, "&a=", fromDate.get(Calendar.MONTH) - 1);
+		append(this.requestURL, "&c=", fromDate.get(Calendar.YEAR));
+	}
 
-		private Param fromDate;
-		private Param fromMonth;
-		private Param fromYear;
+	public YahooDataFetcher(String stockName, Calendar fromDate, Calendar toDate) {
+		this(stockName, fromDate);
+		this.toDate = toDate;
+		append(this.requestURL, "&e=", toDate.get(Calendar.DATE));
+		append(this.requestURL, "&d=", toDate.get(Calendar.MONTH) - 1);
+		append(this.requestURL, "&f=", toDate.get(Calendar.YEAR));
+	}
 
-		private Param toDate;
-		private Param toMonth;
-		private Param toYear;
+	public String getStockName() {
+		return this.stockName;
+	}
 
-		public Builder(Param stockName) {
-			this.requestURL = requestURL;
-			this.stockSymbol = stockName;
+	public void setStockSymbol(String stockName) {
+		this.stockName = stockName;
+		changeURL(stockName);
+	}
+
+	public Calendar getFromDate() {
+		return this.fromDate;
+	}
+
+	public void setFromDate(Calendar fromDate) {
+		this.fromDate = fromDate;
+		changeURL(stockName);
+	}
+
+	public Calendar getToDate() {
+		return this.toDate;
+	}
+
+	public void setToDate(Calendar toDate) {
+		this.toDate = toDate;
+		changeURL(stockName);
+	}
+
+	private void changeURL(String stockName) {
+		this.requestURL = new StringBuilder(basicURL);
+		append(this.requestURL, "s=", stockName);
+		if (getFromDate() != null) {
+			append(this.requestURL, "&b=", getFromDate().get(Calendar.DATE));
+			append(this.requestURL, "&a=",
+					getFromDate().get(Calendar.MONTH) - 1);
+			append(this.requestURL, "&c=", getFromDate().get(Calendar.YEAR));
 		}
-
-		public Builder fromDate(Param fromDate) {
-			this.fromDate = fromDate;
-			return this;
-		}
-
-		public Builder fromMonth(Param fromMonth) {
-			this.fromMonth = fromMonth;
-			return this;
-		}
-
-		public Builder fromYear(Param fromYear) {
-			this.fromYear = fromYear;
-			return this;
-		}
-
-		public Builder toDate(Param toDate) {
-			this.toDate = toDate;
-			return this;
-		}
-
-		public Builder toMonth(Param toMonth) {
-			this.toMonth = toMonth;
-			return this;
-		}
-
-		public Builder toYear(Param toYear) {
-			this.toYear = toYear;
-			return this;
-		}
-
-		public DataFetcher build() {
-			return new YahooDataFetcher(this);
+		if (getToDate() != null) {
+			append(this.requestURL, "&e=", getToDate().get(Calendar.DATE));
+			append(this.requestURL, "&d=", getToDate().get(Calendar.MONTH) - 1);
+			append(this.requestURL, "&f=", getToDate().get(Calendar.YEAR));
 		}
 	}
+
+	private StringBuilder append(StringBuilder sb, String param, Object value) {
+		return sb.append(param).append(value);
+	}
+
+	public static String getBasicURL() {
+		return basicURL;
+	}
+
+	public String getURL() {
+		return this.requestURL.toString();
+	}
+
 }
