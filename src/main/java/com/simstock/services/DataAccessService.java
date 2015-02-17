@@ -4,9 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * Implementation of the generic Data Access Service All CRUD (create, read,
- * update, delete) basic data access operations for any persistent object are
- * performed in this class.
+ * Generic Data Access Service
+ * 
+ * The basic data access operations for any persistent object are performed in
+ * this class.
  **/
 public abstract class DataAccessService<T> {
 
