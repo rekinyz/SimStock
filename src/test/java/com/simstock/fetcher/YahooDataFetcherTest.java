@@ -1,10 +1,13 @@
 package com.simstock.fetcher;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
 import java.util.Calendar;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class YahooDataFetcherTest {
 
@@ -14,23 +17,24 @@ public class YahooDataFetcherTest {
 	YahooDataFetcher yFetcher = new YahooDataFetcher("GOOG");
 
 	@Test
-	public void testStockName() {
+	public void testUrlWithStockNameOnly() {
 		assertEquals(URL + "s=GOOG", yFetcher.getURL());
 	}
 
 	@Test
-	public void testFromDate() {
+	public void testUrlWithFromDate() {
 		fromDate.set(2014, 1, 1);
 		yFetcher = new YahooDataFetcher("GOOG", fromDate);
 		assertEquals(URL + "s=GOOG&a=0&b=1&c=2014", yFetcher.getURL());
 	}
 
 	@Test
-	public void testToDate() {
+	public void testUrlWithToDate() {
 		fromDate.set(2014, 1, 1);
 		toDate.set(2015, 1, 1);
 		yFetcher = new YahooDataFetcher("AAPL", fromDate, toDate);
-		assertEquals(URL + "s=AAPL&a=0&b=1&c=2014&d=0&e=1&f=2015", yFetcher.getURL());
+		assertEquals(URL + "s=AAPL&a=0&b=1&c=2014&d=0&e=1&f=2015",
+				yFetcher.getURL());
 	}
 
 	@Test
@@ -40,6 +44,24 @@ public class YahooDataFetcherTest {
 		yFetcher.setStockSymbol("YHOO");
 		yFetcher.setFromDate(fromDate);
 		yFetcher.setToDate(toDate);
-		assertEquals(URL + "s=YHOO&a=2&b=21&c=2013&d=1&e=11&f=2014", yFetcher.getURL());
+		assertEquals(URL + "s=YHOO&a=2&b=21&c=2013&d=1&e=11&f=2014",
+				yFetcher.getURL());
+	}
+
+	@Test
+	public void testCsvNotDownloaded() {
+		yFetcher.setStockSymbol("600004.SS");
+		File f = yFetcher.csvFile();
+		assertFalse(System.currentTimeMillis() - f.lastModified() <= 8000);
+	}
+
+	@Test
+	public void testCsvDownloaded() {
+		yFetcher.setStockSymbol("600004.SS");
+		File f = yFetcher.csvFile();
+		yFetcher.downloadCsv(f);
+		assertTrue(f.isFile());
+		assertFalse(f.isDirectory());
+		assertTrue(System.currentTimeMillis() - f.lastModified() <= 8000);
 	}
 }
