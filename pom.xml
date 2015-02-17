@@ -9,6 +9,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<csvjdbc.version>1.0.9</csvjdbc.version>
+		<eclipselink.version>2.5.0</eclipselink.version>
 		<jee.version>7.0</jee.version>
 	</properties>
 	<repositories>
@@ -24,11 +25,13 @@
 			<artifactId>csvjdbc</artifactId>
 			<version>${csvjdbc.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>${eclipselink.version}</version>
+		</dependency>
 		<!-- jee framework -->
-<!-- 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>${jee.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>javax</groupId> <artifactId>javaee-api</artifactId> 
+			<version>${jee.version}</version> </dependency> -->
 	</dependencies>
 </project>

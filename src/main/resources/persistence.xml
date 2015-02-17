@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<persistence>
+    <persistence-unit name="StockService" transaction-type="RESOURCE_LOCAL">
+        <class>com.simstock.data.Stock</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.relique.jdbc.csv.CsvDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:relique:csv:src/main/resources"/>
+            <property name="javax.persistence.jdbc.user" value=""/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+        </properties>
+    </persistence-unit>
+</persistence>

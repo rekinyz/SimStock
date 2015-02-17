@@ -1,11 +1,14 @@
 package com.simstock.data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Calendar;
 
-public class Stock {
+public class Stock implements Serializable {
 
+	private static final long serialVersionUID = 4341652176374285062L;
+	private String symbol;
 	private Calendar date;
 	private BigDecimal open;
 	private BigDecimal high;
@@ -13,6 +16,14 @@ public class Stock {
 	private BigDecimal close;
 	private BigInteger volume;
 	private BigDecimal adjClose;
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}
 
 	public Calendar getDate() {
 		return date;
