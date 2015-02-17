@@ -22,7 +22,7 @@ public class YahooDataFetcherTest {
 	public void testFromDate() {
 		fromDate.set(2014, 1, 1);
 		yFetcher = new YahooDataFetcher("GOOG", fromDate);
-		assertEquals(URL + "s=GOOG&b=1&a=0&c=2014", yFetcher.getURL());
+		assertEquals(URL + "s=GOOG&a=0&b=1&c=2014", yFetcher.getURL());
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class YahooDataFetcherTest {
 		fromDate.set(2014, 1, 1);
 		toDate.set(2015, 1, 1);
 		yFetcher = new YahooDataFetcher("AAPL", fromDate, toDate);
-		assertEquals(URL + "s=AAPL&b=1&a=0&c=2014&e=1&d=0&f=2015", yFetcher.getURL());
+		assertEquals(URL + "s=AAPL&a=0&b=1&c=2014&d=0&e=1&f=2015", yFetcher.getURL());
 	}
 
 	@Test
@@ -40,6 +40,6 @@ public class YahooDataFetcherTest {
 		yFetcher.setStockSymbol("YHOO");
 		yFetcher.setFromDate(fromDate);
 		yFetcher.setToDate(toDate);
-		assertEquals(URL + "s=YHOO&b=21&a=2&c=2013&e=11&d=1&f=2014", yFetcher.getURL());
+		assertEquals(URL + "s=YHOO&a=2&b=21&c=2013&d=1&e=11&f=2014", yFetcher.getURL());
 	}
 }
