@@ -29,23 +29,19 @@ public class YahooDataFetcher implements DataFetcher {
 
 	public YahooDataFetcher(String stockName) {
 		this.stockName = stockName;
-		append(requestURL, "s=", stockName);
+		appendStockName();
 	}
 
 	public YahooDataFetcher(String stockName, Calendar fromDate) {
 		this(stockName);
 		this.fromDate = fromDate;
-		append(requestURL, "&a=", fromDate.get(Calendar.MONTH) - 1);
-		append(requestURL, "&b=", fromDate.get(Calendar.DATE));
-		append(requestURL, "&c=", fromDate.get(Calendar.YEAR));
+		appendFromDate();
 	}
 
 	public YahooDataFetcher(String stockName, Calendar fromDate, Calendar toDate) {
 		this(stockName, fromDate);
 		this.toDate = toDate;
-		append(requestURL, "&d=", toDate.get(Calendar.MONTH) - 1);
-		append(requestURL, "&e=", toDate.get(Calendar.DATE));
-		append(requestURL, "&f=", toDate.get(Calendar.YEAR));
+		appendToDate();
 	}
 
 	public String getStockName() {
@@ -54,7 +50,7 @@ public class YahooDataFetcher implements DataFetcher {
 
 	public void setStockSymbol(String stockName) {
 		this.stockName = stockName;
-		changeURL(stockName);
+		changeURL();
 	}
 
 	public Calendar getFromDate() {
@@ -63,7 +59,7 @@ public class YahooDataFetcher implements DataFetcher {
 
 	public void setFromDate(Calendar fromDate) {
 		this.fromDate = fromDate;
-		changeURL(stockName);
+		changeURL();
 	}
 
 	public Calendar getToDate() {
@@ -72,26 +68,7 @@ public class YahooDataFetcher implements DataFetcher {
 
 	public void setToDate(Calendar toDate) {
 		this.toDate = toDate;
-		changeURL(stockName);
-	}
-
-	private void changeURL(String stockName) {
-		requestURL = new StringBuilder(basicURL);
-		append(requestURL, "s=", stockName);
-		if (getFromDate() != null) {
-			append(requestURL, "&a=", getFromDate().get(Calendar.MONTH) - 1);
-			append(requestURL, "&b=", getFromDate().get(Calendar.DATE));
-			append(requestURL, "&c=", getFromDate().get(Calendar.YEAR));
-		}
-		if (getToDate() != null) {
-			append(requestURL, "&d=", getToDate().get(Calendar.MONTH) - 1);
-			append(requestURL, "&e=", getToDate().get(Calendar.DATE));
-			append(requestURL, "&f=", getToDate().get(Calendar.YEAR));
-		}
-	}
-
-	private StringBuilder append(StringBuilder sb, String param, Object value) {
-		return sb.append(param).append(value);
+		changeURL();
 	}
 
 	public static String getBasicURL() {
@@ -101,6 +78,43 @@ public class YahooDataFetcher implements DataFetcher {
 	public String getURL() {
 		log.info(requestURL.toString());
 		return requestURL.toString();
+	}
+
+	private void changeURL() {
+		requestURL = new StringBuilder(basicURL);
+		appendStockName();
+		appendFromDate();
+		appendToDate();
+	}
+
+	private void appendStockName() {
+		append("s=", getStockName());
+	}
+
+	private void appendToDate() {
+		if (getToDate() != null) {
+			append("&d=", getToDate().get(Calendar.MONTH) - 1);
+			append("&e=", getToDate().get(Calendar.DATE));
+			append("&f=", getToDate().get(Calendar.YEAR));
+		}
+	}
+
+	private void appendFromDate() {
+		if (getFromDate() != null) {
+			append("&a=", getFromDate().get(Calendar.MONTH) - 1);
+			append("&b=", getFromDate().get(Calendar.DATE));
+			append("&c=", getFromDate().get(Calendar.YEAR));
+		}
+	}
+
+	private StringBuilder append(String param, Object value) {
+		return requestURL.append(param).append(value);
+	}
+
+	protected File csvFile() {
+		String path = "src/main/resources/";
+		String file = getStockName().replace('.', '-') + ".csv";
+		return new File(path + file);
 	}
 
 	protected void downloadCsv(File target) {
@@ -116,10 +130,8 @@ public class YahooDataFetcher implements DataFetcher {
 		}
 	}
 
-	protected File csvFile() {
-		String path = "src/main/resources/";
-		String file = getStockName().replace('.', '-') + ".csv";
-		return new File(path + file);
+	protected void downloadCsv() {
+		downloadCsv(csvFile());
 	}
 
 }
