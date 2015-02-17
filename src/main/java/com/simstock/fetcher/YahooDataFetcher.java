@@ -21,27 +21,27 @@ public class YahooDataFetcher implements DataFetcher {
 
 	public YahooDataFetcher(String stockName) {
 		this.stockName = stockName;
-		append(this.requestURL, "s=", stockName);
+		append(requestURL, "s=", stockName);
 	}
 
 	public YahooDataFetcher(String stockName, Calendar fromDate) {
 		this(stockName);
 		this.fromDate = fromDate;
-		append(this.requestURL, "&b=", fromDate.get(Calendar.DATE));
-		append(this.requestURL, "&a=", fromDate.get(Calendar.MONTH) - 1);
-		append(this.requestURL, "&c=", fromDate.get(Calendar.YEAR));
+		append(requestURL, "&b=", fromDate.get(Calendar.DATE));
+		append(requestURL, "&a=", fromDate.get(Calendar.MONTH) - 1);
+		append(requestURL, "&c=", fromDate.get(Calendar.YEAR));
 	}
 
 	public YahooDataFetcher(String stockName, Calendar fromDate, Calendar toDate) {
 		this(stockName, fromDate);
 		this.toDate = toDate;
-		append(this.requestURL, "&e=", toDate.get(Calendar.DATE));
-		append(this.requestURL, "&d=", toDate.get(Calendar.MONTH) - 1);
-		append(this.requestURL, "&f=", toDate.get(Calendar.YEAR));
+		append(requestURL, "&e=", toDate.get(Calendar.DATE));
+		append(requestURL, "&d=", toDate.get(Calendar.MONTH) - 1);
+		append(requestURL, "&f=", toDate.get(Calendar.YEAR));
 	}
 
 	public String getStockName() {
-		return this.stockName;
+		return stockName;
 	}
 
 	public void setStockSymbol(String stockName) {
@@ -50,7 +50,7 @@ public class YahooDataFetcher implements DataFetcher {
 	}
 
 	public Calendar getFromDate() {
-		return this.fromDate;
+		return fromDate;
 	}
 
 	public void setFromDate(Calendar fromDate) {
@@ -59,7 +59,7 @@ public class YahooDataFetcher implements DataFetcher {
 	}
 
 	public Calendar getToDate() {
-		return this.toDate;
+		return toDate;
 	}
 
 	public void setToDate(Calendar toDate) {
@@ -68,18 +68,18 @@ public class YahooDataFetcher implements DataFetcher {
 	}
 
 	private void changeURL(String stockName) {
-		this.requestURL = new StringBuilder(basicURL);
-		append(this.requestURL, "s=", stockName);
+		requestURL = new StringBuilder(basicURL);
+		append(requestURL, "s=", stockName);
 		if (getFromDate() != null) {
-			append(this.requestURL, "&b=", getFromDate().get(Calendar.DATE));
-			append(this.requestURL, "&a=",
+			append(requestURL, "&b=", getFromDate().get(Calendar.DATE));
+			append(requestURL, "&a=",
 					getFromDate().get(Calendar.MONTH) - 1);
-			append(this.requestURL, "&c=", getFromDate().get(Calendar.YEAR));
+			append(requestURL, "&c=", getFromDate().get(Calendar.YEAR));
 		}
 		if (getToDate() != null) {
-			append(this.requestURL, "&e=", getToDate().get(Calendar.DATE));
-			append(this.requestURL, "&d=", getToDate().get(Calendar.MONTH) - 1);
-			append(this.requestURL, "&f=", getToDate().get(Calendar.YEAR));
+			append(requestURL, "&e=", getToDate().get(Calendar.DATE));
+			append(requestURL, "&d=", getToDate().get(Calendar.MONTH) - 1);
+			append(requestURL, "&f=", getToDate().get(Calendar.YEAR));
 		}
 	}
 
@@ -92,7 +92,7 @@ public class YahooDataFetcher implements DataFetcher {
 	}
 
 	public String getURL() {
-		return this.requestURL.toString();
+		return requestURL.toString();
 	}
 
 }
