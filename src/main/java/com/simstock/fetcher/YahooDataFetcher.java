@@ -1,6 +1,13 @@
 package com.simstock.fetcher;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Calendar;
+import java.util.logging.Logger;
 
 /**
  * YahooDataFetcher
@@ -14,6 +21,7 @@ public class YahooDataFetcher implements DataFetcher {
 
 	private static final String basicURL = "http://ichart.yahoo.com/table.csv?";
 	private StringBuilder requestURL = new StringBuilder(basicURL);
+	Logger log = Logger.getLogger(YahooDataFetcher.class.getName());
 
 	private String stockName;
 	private Calendar fromDate;
@@ -91,7 +99,27 @@ public class YahooDataFetcher implements DataFetcher {
 	}
 
 	public String getURL() {
+		log.info(requestURL.toString());
 		return requestURL.toString();
+	}
+
+	protected void downloadCsv(File target) {
+		URL website;
+		try {
+			website = new URL(getURL());
+			Files.copy(website.openStream(), target.toPath(),
+					StandardCopyOption.REPLACE_EXISTING);
+		} catch (MalformedURLException e) {
+			log.info("can not download file");
+		} catch (IOException e) {
+			log.info("file not found");
+		}
+	}
+
+	protected File csvFile() {
+		String path = "src/main/resources/";
+		String file = getStockName().replace('.', '-') + ".csv";
+		return new File(path + file);
 	}
 
 }
