@@ -5,8 +5,8 @@ import java.util.Calendar;
 /**
  * YahooDataFetcher
  * 
- * Data Fetcher using "Builder" Design Pattern that is introduced in Effective
- * Java
+ * Simplify the Yahoo Stock API, build the data fetching URL with stock name,
+ * from date and to date only
  * 
  * @author rekinyz
  */
@@ -72,8 +72,7 @@ public class YahooDataFetcher implements DataFetcher {
 		append(requestURL, "s=", stockName);
 		if (getFromDate() != null) {
 			append(requestURL, "&b=", getFromDate().get(Calendar.DATE));
-			append(requestURL, "&a=",
-					getFromDate().get(Calendar.MONTH) - 1);
+			append(requestURL, "&a=", getFromDate().get(Calendar.MONTH) - 1);
 			append(requestURL, "&c=", getFromDate().get(Calendar.YEAR));
 		}
 		if (getToDate() != null) {
