@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Calendar;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Stock implements Serializable {
 
 	private static final long serialVersionUID = 4341652176374285062L;
@@ -17,6 +20,8 @@ public class Stock implements Serializable {
 	private BigInteger volume;
 	private BigDecimal adjClose;
 
+	public Stock(){}
+	
 	public String getSymbol() {
 		return symbol;
 	}
