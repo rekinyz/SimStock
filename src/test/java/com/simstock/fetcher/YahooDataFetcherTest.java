@@ -56,7 +56,7 @@ public class YahooDataFetcherTest {
 		assertFalse(System.currentTimeMillis() - f.lastModified() <= 8000);
 	}
 
-	@Test
+	@Test(timeout=8000)
 	public void testCsvDownloadedTrue() {
 		yFetcher.setStockSymbol("600004.SS");
 		File f = yFetcher.csvFile();
