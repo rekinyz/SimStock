@@ -8,9 +8,8 @@
 	<name>Simulate Stock</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<csvjdbc.version>1.0.13</csvjdbc.version>
+		<super-csv.version>2.2.1</super-csv.version>
 		<eclipselink.version>2.5.0</eclipselink.version>
-		<jee.version>7.0</jee.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -30,17 +29,14 @@
 	<dependencies>
 		<!-- csvjdbc framework -->
 		<dependency>
-			<groupId>net.sourceforge.csvjdbc</groupId>
-			<artifactId>csvjdbc</artifactId>
-			<version>${csvjdbc.version}</version>
+			<groupId>net.sf.supercsv</groupId>
+			<artifactId>super-csv</artifactId>
+			<version>${super-csv.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
 			<version>${eclipselink.version}</version>
 		</dependency>
-		<!-- jee framework -->
-		<!-- <dependency> <groupId>javax</groupId> <artifactId>javaee-api</artifactId> 
-			<version>${jee.version}</version> </dependency> -->
 	</dependencies>
 </project>
