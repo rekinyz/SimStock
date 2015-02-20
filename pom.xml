@@ -8,7 +8,7 @@
 	<name>Simulate Stock</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<csvjdbc.version>1.0.9</csvjdbc.version>
+		<csvjdbc.version>1.0.13</csvjdbc.version>
 		<eclipselink.version>2.5.0</eclipselink.version>
 		<jee.version>7.0</jee.version>
 	</properties>
@@ -16,6 +16,15 @@
 		<repository>
 			<id>pentaho-releases</id>
 			<url>http://repository.pentaho.org/artifactory/repo/</url>
+		</repository>
+		<repository>
+			<id>repo.springsource.org.milestone</id>
+			<name>Spring Framework Maven Milestone Repository</name>
+			<url>https://repo.springsource.org/milestone</url>
+		</repository>
+		<repository>
+			<id>SourceForge</id>
+			<url>http://csvjdbc.sourceforge.net/maven2</url>
 		</repository>
 	</repositories>
 	<dependencies>
