@@ -5,10 +5,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Calendar;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
 public class Stock implements Serializable {
 
 	private static final long serialVersionUID = 4341652176374285062L;
@@ -31,7 +27,6 @@ public class Stock implements Serializable {
 		this.symbol = symbol;
 	}
 
-	@Id
 	public Calendar getDate() {
 		return date;
 	}
