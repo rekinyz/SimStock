@@ -30,20 +30,6 @@ public abstract class DataAccessService<T> {
 	}
 
 	/**
-	 * Stores an instance of the entity class in the database
-	 * 
-	 * @param T
-	 *            Object
-	 * @return
-	 */
-	public T create(T t) {
-		this.em.persist(t);
-		this.em.flush();
-		this.em.refresh(t);
-		return t;
-	}
-
-	/**
 	 * Retrieves an entity instance that was previously persisted to the
 	 * database
 	 * 

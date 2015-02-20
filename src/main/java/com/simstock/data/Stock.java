@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Stock implements Serializable {
@@ -30,6 +31,7 @@ public class Stock implements Serializable {
 		this.symbol = symbol;
 	}
 
+	@Id
 	public Calendar getDate() {
 		return date;
 	}
