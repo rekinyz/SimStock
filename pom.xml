@@ -8,29 +8,14 @@
 	<name>Simulate Stock</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<super-csv.version>2.2.1</super-csv.version>
+		<jee.version>7.0</jee.version>
 	</properties>
-	<repositories>
-		<repository>
-			<id>pentaho-releases</id>
-			<url>http://repository.pentaho.org/artifactory/repo/</url>
-		</repository>
-		<repository>
-			<id>repo.springsource.org.milestone</id>
-			<name>Spring Framework Maven Milestone Repository</name>
-			<url>https://repo.springsource.org/milestone</url>
-		</repository>
-		<repository>
-			<id>SourceForge</id>
-			<url>http://csvjdbc.sourceforge.net/maven2</url>
-		</repository>
-	</repositories>
 	<dependencies>
-		<!-- super-csv framework -->
+		<!-- jee framework -->
 		<dependency>
-			<groupId>net.sf.supercsv</groupId>
-			<artifactId>super-csv</artifactId>
-			<version>${super-csv.version}</version>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>${jee.version}</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -15,10 +15,22 @@ public class Stock implements Serializable {
 	private BigDecimal low;
 	private BigDecimal close;
 	private BigInteger volume;
-	private BigDecimal adjClose;
 
-	public Stock(){}
-	
+	public Stock() {
+	}
+
+	public Stock(String symbol, Calendar date, BigDecimal open,
+			BigDecimal high, BigDecimal low, BigDecimal close, BigInteger volume) {
+		super();
+		this.symbol = symbol;
+		this.date = date;
+		this.open = open;
+		this.high = high;
+		this.low = low;
+		this.close = close;
+		this.volume = volume;
+	}
+
 	public String getSymbol() {
 		return symbol;
 	}
@@ -75,12 +87,46 @@ public class Stock implements Serializable {
 		this.volume = volume;
 	}
 
-	public BigDecimal getAdjClose() {
-		return adjClose;
+	public BigDecimal getAverage() {
+		return high.add(low).divide(new BigDecimal(2));
 	}
 
-	public void setAdjClose(BigDecimal adjClose) {
-		this.adjClose = adjClose;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Stock other = (Stock) obj;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (symbol == null) {
+			if (other.symbol != null)
+				return false;
+		} else if (!symbol.equals(other.symbol))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Stock [symbol=" + symbol + ", date=" + date + ", open=" + open
+				+ ", high=" + high + ", low=" + low + ", close=" + close
+				+ ", volume=" + volume + "]";
 	}
 
 }
