@@ -14,7 +14,7 @@ public class YahooDataFetcherTest {
 	private static final String URL = YahooDataFetcher.getBasicURL();
 	private static final Calendar fromDate = Calendar.getInstance();
 	private static final Calendar toDate = Calendar.getInstance();
-	
+
 	YahooDataFetcher yFetcher = new YahooDataFetcher("GOOG");
 
 	@Test
@@ -56,7 +56,7 @@ public class YahooDataFetcherTest {
 		assertFalse(System.currentTimeMillis() - f.lastModified() <= 8000);
 	}
 
-	@Test(timeout=8000)
+	@Test(timeout = 8000)
 	public void testCsvDownloadedTrue() {
 		yFetcher.setStockSymbol("600004.SS");
 		File f = yFetcher.csvFile();
